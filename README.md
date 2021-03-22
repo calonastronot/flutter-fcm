@@ -1,16 +1,33 @@
-# fcm_tutor
+flutter create flutter_fcm
+cd flutter_fcm
+=======================
+lalu install firebase messaging
 
-A new Flutter application.
+firebase_messaging: ^7.0.3
+https://pub.dev/packages/firebase_messaging/versions
 
-## Getting Started
+tambahkan code di file android/app/src/build.gradle
+=============================================================
+apply plugin: 'com.google.gms.google-services'
 
-This project is a starting point for a Flutter application.
+tambahkan code di file android/app/build.gradle
+=============================================================
+classpath 'com.google.gms:google-services:4.2.0'
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+tambahkan code di file android/app/src/main/AndroidManifest.xml
+==============================================================
+<intent-filter>
+ <action android:name="FLUTTER_NOTIFICATION_CLICK"/>
+ <category android:name="android.intent.category.DEFAULT"/>
+</intent-filter>
+==============================================================
+Download google-service.json dari  **firebase**, simpan di folder android/app/ 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+di main dart tambahkan 
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+String _message = '';
+
+ final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+ _firebaseMessaging.getToken().then((token) => print(token));
